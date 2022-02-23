@@ -1,0 +1,19 @@
+{
+  "name": "businessman",
+  "version": "1.0.0",
+  "description": "Simple discord bot in Javascript with Discord.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.27.2",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0"
+  }
+}
