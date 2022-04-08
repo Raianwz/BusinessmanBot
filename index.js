@@ -1,5 +1,6 @@
 const { Client, Intents } = require('discord.js');
 const dotenv = require("dotenv")
+let currency = require('./services/currency');
 if (process.env.NODE_ENV != 'production') { dotenv.config() }
 const TOKEN = process.env.TOKEN
 const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
@@ -18,12 +19,16 @@ client.on('messageCreate', async message => {
 
     if(message.content.startsWith(prefix) && message.content.length > 2){
         const args = message.content.trim().slice(prefix.length).split(/ +/g);
+        console.log(args);
         const commandName = args.shift().toLocaleLowerCase();
 
         if(commandName === "ping"){
             await message.reply({ content: `Pong!` });
+        }else if(commandName === "dolar"){
+            await message.reply({content: await currency.USDToBrl()})
+        }else if(commandName === "converter"){
+            await message.reply({content: await currency.ANYToANY(args[0])})
         }
-
     }
 
 })
