@@ -19,15 +19,18 @@ client.on('messageCreate', async message => {
 
     if(message.content.startsWith(prefix) && message.content.length > 2){
         const args = message.content.trim().slice(prefix.length).split(/ +/g);
-        console.log(args);
         const commandName = args.shift().toLocaleLowerCase();
 
         if(commandName === "ping"){
             await message.reply({ content: `Pong!` });
         }else if(commandName === "dolar"){
-            await message.reply({content: await currency.USDToBrl()})
+            await message.reply({content: await currency.USDToBrl()});
+        }else if(commandName === "euro"){
+            await message.reply({content: await currency.EURToBrl()})
         }else if(commandName === "converter"){
             await message.reply({content: await currency.ANYToANY(args[0])})
+        }else if(commandName === "quantoda"){
+            await message.reply({content: await currency.CurrentAmount(args)})
         }
     }
 
