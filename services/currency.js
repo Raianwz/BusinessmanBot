@@ -6,12 +6,12 @@ const combinations = require('./combinations.json');
 async function  getUSDToBRL() {
     const response = await fetch('http://economia.awesomeapi.com.br/json/last/USD-BRL');
     const data = await response.json();
-    return `${data.USD.name} está valendo R$ ${data.USD.bid} 💵 Max. R$ ${data.USD.high} ⬆ ➖ Min. R$ ${data.USD.low} ⬇ ➖ <a:Frog:936264596514291723> Dados de ${data.USD.create_date}`;
+    return `${data.USDBRL.name} está valendo R$ ${data.USDBRL.bid} 💵 Max. R$ ${data.USDBRL.high} ⬆ ➖ Min. R$ ${data.USDBRL.low} ⬇ ➖ <a:Frog:936264596514291723> Dados de ${data.USDBRL.create_date}`;
 }
 async function  getEURToBRL() {
     const response = await fetch('http://economia.awesomeapi.com.br/json/last/EUR-BRL');
     const data = await response.json();
-    return `${data.EUR.name} está valendo R$ ${data.EUR.bid} 💵 Max. R$ ${data.EUR.high} ⬆ ➖ Min. R$ ${data.EUR.low} ⬇ ➖ <a:Frog:936264596514291723> Dados de ${data.EUR.create_date}`;
+    return `${data.EURBRL.name} está valendo R$ ${data.EURBRL.bid} 💵 Max. R$ ${data.EURBRL.high} ⬆ ➖ Min. R$ ${data.EURBRL.low} ⬇ ➖ <a:Frog:936264596514291723> Dados de ${data.EURBRL.create_date}`;
 } 
 async function  getANYToANY(param) {
     if(!isValidConversion(param)) return 'Informe os valores corretos!';
@@ -35,9 +35,19 @@ async function getCurrentAmount(params)
     const response = await fetch('http://economia.awesomeapi.com.br/json/last/' + params[1]);
     const data = await response.json();
 
-    let currentValue = parseFloat(data[coin].bid);
+    let currentValue;
+    let code;
+    for(var currency in data)
+    {
+        if(data[currency].bid !== undefined)
+            currentValue = parseFloat(data[currency].bid);
+        if(data[currency].codein !== undefined)
+            code = data[currency].codein;
+    }
+    
+    if(currentValue === undefined || code === undefined) return 'Erro na operação!';
 
-    return valueFloat*currentValue + " " +  coins[data[coin].codein] + "s";
+    return valueFloat*currentValue + " " +  coins[code] + "s";
 
 }
 
