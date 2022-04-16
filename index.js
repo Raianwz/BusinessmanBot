@@ -27,9 +27,9 @@ client.on('messageCreate', async message => {
             await message.reply({content: await currency.USDToBrl()});
         }else if(commandName === "euro"){
             await message.reply({content: await currency.EURToBrl()})
-        }else if(commandName === "converter"){
-            await message.reply({content: await currency.ANYToANY(args[0])})
-        }else if(commandName === "quantoda"){
+        }else if(commandName === "converter" || commandName === "cm"){
+            await message.reply({content: await currency.ANYToANY(args[0].toUpperCase())})
+        }else if(commandName === "quantoda" || commandName === "qtd"){
             await message.reply({content: await currency.CurrentAmount(args)})
         }
     }
