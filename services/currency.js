@@ -47,7 +47,8 @@ async function getCurrentAmount(params)
     
     if(currentValue === undefined || code === undefined) return 'Erro na operação!';
 
-    return (valueFloat*currentValue).toFixed(4) + " " +  coins[code] + "s";
+    //return (valueFloat*currentValue).toFixed(2) + " " +  coins[code] + "s";
+    return `${(valueFloat*currentValue).toFixed(2)} ${coins[code]}s <:BusinessCash:984999405155401789>`;
 
 }
 
